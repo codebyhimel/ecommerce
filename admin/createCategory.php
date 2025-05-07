@@ -11,7 +11,7 @@ if (isset($_SESSION['msg'])) {
 }
 if (isset($_REQUEST['submit'])) {
 
-    $sql = 'INSERT INTO `brand`(`name`, `description`, `img_url`, `isactive`) VALUES (?,?,?,?)';
+    $sql = 'INSERT INTO `category`(`name`, `description`, `img_url`, `isactive`) VALUES (?,?,?,?)';
     $stmt = $db->dbHandler->prepare($sql);
     $stmt->bindParam(1, $name);
     $stmt->bindParam(2, $description);
@@ -31,7 +31,7 @@ if (isset($_REQUEST['submit'])) {
     }
     $img_url =  $image;
     $stmt->execute();
-    $msg = "Brand Insert Success!";
+    $msg = "Category Insert Success!";
 }
 // }
 ?>
@@ -54,11 +54,11 @@ if (isset($_REQUEST['submit'])) {
 
         <section role="main" class="content-body content-body-modern">
             <header class="page-header page-header-left-inline-breadcrumb">
-                <h2 class="font-weight-bold text-6">Create Brand</h2>
+                <h2 class="font-weight-bold text-6">Create Category</h2>
                 <div class="right-wrapper">
                     <ol class="breadcrumbs">
                         <li><span>Home</span></li>
-                        <li><span>Create Brand</span></li>
+                        <li><span>Create Category</span></li>
                     </ol>
                     <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
                 </div>
@@ -76,8 +76,8 @@ if (isset($_REQUEST['submit'])) {
                             ?>
                             <form action="" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label class="" for="name">Brand Name</label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder=" Brand name">
+                                    <label class="" for="name">Category Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder=" Category name">
                                 </div>
                                 <div class="form-group">
                                     <label class="" for="description">description</label>

@@ -72,7 +72,7 @@
 
                     <li class="nav-parent nav-active nav-expanded">
                         <a class="nav-link" href="#">
-                            <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                            <i class="fab fa-apple" aria-hidden="true"></i>
                             <span>Brand</span>
                         </a>
                         <ul class="nav nav-children">
@@ -88,6 +88,22 @@
                     </li>
 
 
+                    <li class="nav-parent nav-active nav-expanded">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                            <span>Category</span>
+                        </a>
+                        <ul class="nav nav-children">
+
+                            <li>
+                                <a class="nav-link" href="createCategory.php">- Create Category</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="categoryIndex.php">- Category List</a>
+                            </li>
+
+                        </ul>
+                    </li>
 
                 </ul>
             </nav>

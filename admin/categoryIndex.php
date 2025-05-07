@@ -7,33 +7,33 @@ $db = new Db();
 $data = [];
 
 // Brand delete start
-if (isset($_GET['brand_id'])) {
-    $id = $_GET['brand_id'];
+if (isset($_GET['category_id'])) {
+    $id = $_GET['category_id'];
 
     $sql = "SELECT img_url FROM brand WHERE id = :id";
     $stmt = $db->dbHandler->prepare($sql);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
-    $brand = $stmt->fetch(PDO::FETCH_ASSOC);
+    $category = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($brand) {
-        if (!empty($brand['img_url']) && file_exists($brand['img_url'])) {
-            unlink($brand['img_url']);
+    if ($category) {
+        if (!empty($category['img_url']) && file_exists($category['img_url'])) {
+            unlink($category['img_url']);
         }
 
-        $deleteSql = "DELETE FROM brand WHERE id = :id";
+        $deleteSql = "DELETE FROM category WHERE id = :id";
         $delStmt = $db->dbHandler->prepare($deleteSql);
         $delStmt->bindParam(':id', $id);
         $delStmt->execute();
 
-        $_SESSION['msg'] = "Brand deleted successfully!";
+        $_SESSION['msg'] = "Category deleted successfully!";
     } else {
-        $_SESSION['msg'] = "Brand not found!";
+        $_SESSION['msg'] = "Category not found!";
     }
 }
 // Brand delete end
 
-$sql = "SELECT * FROM `brand`";
+$sql = "SELECT * FROM `category`";
 $stmt = $db->dbHandler->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -46,11 +46,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section role="main" class="content-body content-body-modern mt-5">
         <header class="page-header page-header-left-inline-breadcrumb">
-            <h2 class="font-weight-bold text-6">Brand List </h2>
+            <h2 class="font-weight-bold text-6">Category List </h2>
             <div class="right-wrapper">
                 <ol class="breadcrumbs">
                     <li><span>Home</span></li>
-                    <li><span>Brand List</span></li>
+                    <li><span>Category List</span></li>
                 </ol>
                 <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
             </div>
@@ -65,7 +65,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="datatable-header">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-12 col-lg-auto mb-3 mb-lg-0">
-                                        <a href="/shop/admin/brandCreate.php" class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Add Brand</a>
+                                        <a href="/shop/admin/createCategory.php" class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Add Category</a>
                                     </div>
                                     <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
                                         <div class="d-flex align-items-lg-center flex-column flex-lg-row">
@@ -142,16 +142,16 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <a href="./brandEdit.php?brand_id=<?= $item['id'] ?>" class="btn btn-primary">Edit</a>
-                                                    <a href="brandIndex.php?brand_id=<?= $item['id']; ?>"
-                                                        onclick="return confirm('Are you sure you want to delete this Brand?');"
+                                                    <a href="./categoryEdit.php?category_id=<?= $item['id'] ?>" class="btn btn-primary">Edit</a>
+                                                    <a href="categoryIndex.php?category_id=<?= $item['id']; ?>"
+                                                        onclick="return confirm('Are you sure you want to delete this category?');"
                                                         class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else : ?>
                                         <tr>
-                                            <td colspan="7" class="text-center">No brand found.</td>
+                                            <td colspan="7" class="text-center">No Category found.</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>

@@ -6,17 +6,17 @@ $msg = null;
 $db = new Db();
 // if ($_SESSION['data']['email'] != null && $_SESSION['data']['login'] == true) {
 
-if (isset($_REQUEST['brand_id'])) {
-    $sql = "SELECT * FROM `brand` WHERE `id` = :brandId ";
+if (isset($_REQUEST['category_id'])) {
+    $sql = "SELECT * FROM `category` WHERE `id` = :categoryId ";
     $stmt = $db->dbHandler->prepare($sql);
-    $stmt->bindParam('brandId', $_REQUEST['brand_id']);
+    $stmt->bindParam('categoryId', $_REQUEST['category_id']);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     // var_dump($data);
 }
 
 if (isset($_REQUEST['submit'])) {
-    $sql = 'UPDATE `brand` SET `name`=:name,`description`=:description,`img_url`=:img_url, `isActive`=:isActive  WHERE `id` = :id';
+    $sql = 'UPDATE `category` SET `name`=:name,`description`=:description,`img_url`=:img_url, `isActive`=:isActive  WHERE `id` = :id';
     $stmt = $db->dbHandler->prepare($sql);
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':name', $name);
@@ -47,8 +47,8 @@ if (isset($_REQUEST['submit'])) {
     // var_dump($_FILES['image']);
 
     $stmt->execute();
-    $msg = "Brand Update Success!";
-    header("location:brandIndex.php");
+    $msg = "Category Update Success!";
+    header("location:categoryIndex.php");
 }
 ?>
 
@@ -70,11 +70,11 @@ if (isset($_REQUEST['submit'])) {
 
         <section role="main" class="content-body content-body-modern">
             <header class="page-header page-header-left-inline-breadcrumb">
-                <h2 class="font-weight-bold text-6">Edit Brand</h2>
+                <h2 class="font-weight-bold text-6">Edit Category</h2>
                 <div class="right-wrapper">
                     <ol class="breadcrumbs">
                         <li><span>Home</span></li>
-                        <li><span>Edit Brand</span></li>
+                        <li><span>Edit Category</span></li>
                     </ol>
                     <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
                 </div>
@@ -93,7 +93,7 @@ if (isset($_REQUEST['submit'])) {
                             <form action="" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<?= $data['id']; ?>">
                                 <div class="form-group">
-                                    <label class="" for="name">Brand Name</label>
+                                    <label class="" for="name">Category Name</label>
                                     <input type="text" name="name" class="form-control" id="name" placeholder="subTitle" value="<?= $data['name']; ?>">
                                 </div>
                                 <div class="form-group">
