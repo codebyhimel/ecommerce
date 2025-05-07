@@ -113,10 +113,11 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <tr>
                                         <th><input type="checkbox" class="select-all checkbox-style-1" /></th>
                                         <th>ID</th>
-                                        <th>name</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
                                         <th>description</th>
-                                        <th>img_url</th>
-                                        <!-- <th>Create at</th> -->
+                                        <th>Status</th>
+                                        <th>Create at</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -126,9 +127,25 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             <tr>
                                                 <td><input type="checkbox" class="checkbox-style-1" /></td>
                                                 <td><?= $item['id'] ?></td>
+                                                <td><img src="<?= $item['img_url'] ?>" alt="!" height="50"></td>
                                                 <td><?= $item['name'] ?></td>
                                                 <td><?= $item['description'] ?></td>
-                                                <td><?= $item['img_url'] ?></td>
+                                                <td><?php 
+                                                    if ($item['isActive'] == 1) {
+                                                        echo "Active";
+                                                    } else {
+                                                        echo "Deactive";
+                                                    } 
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        $date = strtotime($item['create_at']);
+                                                        $day =  date('d-M-Y H:i A', $date);
+                                                        echo $day; 
+                                                        
+                                                        ?>
+                                                </td>
                                                 <td>
                                                     <a href="./brandEdit.php?brand_id=<?= $item['id'] ?>" class="btn btn-primary">Edit</a>
                                                     <a href="brandIndex.php?brand_id=<?= $item['id']; ?>"

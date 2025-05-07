@@ -11,26 +11,25 @@ if (isset($_SESSION['msg'])) {
 }
 if (isset($_REQUEST['submit'])) {
 
-    $sql = 'INSERT INTO `brand`(`name`, `description`, `img_url`) VALUES (?,?,?)';
+    $sql = 'INSERT INTO `brand`(`name`, `description`, `img_url`, `isactive`) VALUES (?,?,?,?)';
     $stmt = $db->dbHandler->prepare($sql);
     $stmt->bindParam(1, $name);
     $stmt->bindParam(2, $description);
     $stmt->bindParam(3, $img_url);
+    $stmt->bindParam(4, $status);
     $name = $_REQUEST['name'];
     $description = $_REQUEST['description'];
-    $img_url = $_REQUEST['img_url'];
+    $status = $_REQUEST['isActive'];
 
     // Upload File
-    // $dir = "uploads/";
-    // $filename = $dir . $_FILES['image']['name'];
-    // if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
-    //     $image = "uploads/" . $_FILES['image']['name'];
-    // } else {
-    //     $image = "";
-    // }
-
-    // $isActive = $_REQUEST['isActive'];
-    // // $password = md5($_REQUEST['password']);
+    $dir = "uploads/";
+    $filename = $dir . $_FILES['img_url']['name'];
+    if (move_uploaded_file($_FILES['img_url']['tmp_name'], $filename)) {
+        $image = "uploads/" . $_FILES['img_url']['name'];
+    } else {
+        $image = "";
+    }
+    $img_url =  $image;
     $stmt->execute();
     $msg = "Brand Insert Success!";
 }
@@ -85,22 +84,17 @@ if (isset($_REQUEST['submit'])) {
                                     <input type="text" name="description" class="form-control" id="description" placeholder="description">
                                 </div>
                                 <div class="form-group">
-                                    <label class="" for="img_url">img_url</label>
-                                    <input type="text" name="img_url" class="form-control" id="img_url" placeholder="img_url">
+                                    <label class="" for="img_url">Image</label>
+                                    <input type="file" name="img_url" class="form-control" id="img_url" placeholder="img_url">
                                 </div>
-
-                                <!-- <div class="form-group">
-                                    <label for="image">image</label>
-                                    <input type="file" name="image" class="form-control" id="image">
-                                </div> -->
-                                <!-- <div class="form-group">
+                                 <div class="form-group">
                                     <label for="isActive">Status</label>
                                     <select name="isActive" id="isActive" class="form-control">
                                         <option value="">~~Select~~</option>
                                         <option value="1">Active</option>
                                         <option value="0">Deactive</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 <div class="form-group">
                                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Save</button>
                                 </div>

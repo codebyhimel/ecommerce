@@ -16,39 +16,36 @@ if (isset($_REQUEST['brand_id'])) {
 }
 
 if (isset($_REQUEST['submit'])) {
-    $sql = 'UPDATE `brand` SET `name`=:name,`description`=:description,`img_url`=:img_url WHERE `id` = :id';
+    $sql = 'UPDATE `brand` SET `name`=:name,`description`=:description,`img_url`=:img_url, `isActive`=:isActive  WHERE `id` = :id';
     $stmt = $db->dbHandler->prepare($sql);
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':img_url', $img_url);
-    
+    $stmt->bindParam(':img_url', $image);
+    $stmt->bindParam(':isActive', $isActive);
+
     $id = $_REQUEST['id'];
     $name = $_REQUEST['name'];
     $description = $_REQUEST['description'];
-    $detaiimg_urlls = $_REQUEST['img_url'];
-    // $btnOneText = $_REQUEST['btnOneText'];
-    // $btnOneUrl = $_REQUEST['btnOneUrl'];
-    // $btnTwoTxt = $_REQUEST['btnTwoTxt'];
-    // $btnTwoUrl = $_REQUEST['btnTwoUrl'];
-    // $align = $_REQUEST['align'];
-    // if (!empty($_FILES['image']) && $_FILES['image']['name'] != "") {
-    //     var_dump($_FILES['image']);
-    //     if ($_REQUEST['oldImage'] != null) {
-    //         unlink("/" . $_REQUEST['oldImage']);
-    //     }
-    //     $dir = "uploads/";
-    //     $filename = $dir . $_FILES['image']['name'];
-    //     if (move_uploaded_file($_FILES['image']['tmp_name'], $filename)) {
-    //         $image = "uploads/" . $_FILES['image']['name'];
-    //     }
-    // } else {
-    //     $image = $_REQUEST['oldImage'];
-    // }
-    // var_dump($_FILES['image']);
+    $isActive = $_REQUEST['isActive'];
 
-    // Upload File
-    // $isActive = $_REQUEST['isActive'];
+    if (!empty($_FILES['img_url']) && $_FILES['img_url']['name'] != "") {
+        // var_dump($_FILES['img_url']);
+        if ($_REQUEST['oldImage'] != null) {
+            unlink("/" . $_REQUEST['oldImage']);
+        }
+        $dir = "uploads/";
+        $filename = $dir . $_FILES['img_url']['name'];
+        if (move_uploaded_file($_FILES['img_url']['tmp_name'], $filename)) {
+            $image = "uploads/" . $_FILES['img_url']['name'];
+        }
+        else{
+             $image = "";
+        }
+    } else {
+        $image = $_REQUEST['oldImage'];
+    }
+    // var_dump($_FILES['image']);
 
     $stmt->execute();
     $msg = "Brand Update Success!";
@@ -106,9 +103,22 @@ if (isset($_REQUEST['submit'])) {
                                 </div>
                                 <div class="form-group">
                                     <label class="" for="img_url">img_url</label>
-                                    <input type="text" name="img_url" class="form-control" id="img_url" placeholder="img_url" value="<?= $data['img_url']; ?>">
+                                    <input type="file" name="img_url" class="form-control" id="img_url">
+                                    <img src="./<?php echo $data['img_url']; ?>" alt="!" height="50">
+                                    <input type="hidden" name="oldImage" value="<?php echo $data['img_url']; ?>">
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="isActive">Status</label>
+                                    <select name="isActive" id="isActive" class="form-control">
+                                        <option value="">~~Select~~</option>
+                                        <option value="1" <?php if ($data['isActive'] == 1) {
+                                                                echo "selected";
+                                                            } ?>>Active</option>
+                                        <option value="0" <?php if ($data['isActive'] == 0) {
+                                                                echo "selected";
+                                                            } ?>>Deactive</option>
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
                                     <button type="submit" name="submit" value="submit" class="btn btn-primary">Update</button>
