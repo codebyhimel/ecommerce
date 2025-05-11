@@ -105,6 +105,25 @@
                         </ul>
                     </li>
 
+
+                    <li class="nav-parent nav-active nav-expanded">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-tag" aria-hidden="true"></i>
+                            <span>attribute</span>
+                        </a>
+                        <ul class="nav nav-children">
+
+                            <li>
+                                <a class="nav-link" href="attributeCreate.php">- Create Attribute</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="attributeIndex.php">- Attribute List</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
                 </ul>
             </nav>
 
