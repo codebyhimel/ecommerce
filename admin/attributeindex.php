@@ -115,6 +115,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     ?>
                                                 </td>
                                                 <td>
+                                                    <a href="./addattrvalue.php?attr_id=<?= $item['id'] ?>" class="btn btn-primary">Add Value</a>
                                                     <a href="./attributeEdit.php?attr_id=<?= $item['id'] ?>" class="btn btn-primary">Edit</a>
                                                     <a href="attributeIndex.php?attr_id=<?= $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Attribute?');" class="btn btn-danger">Delete</a>
                                                 </td>

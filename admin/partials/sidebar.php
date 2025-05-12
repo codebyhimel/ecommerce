@@ -117,7 +117,7 @@
                                 <a class="nav-link" href="attributeCreate.php">- Create Attribute</a>
                             </li>
                             <li>
-                                <a class="nav-link" href="attributeIndex.php">- Attribute List</a>
+                                <a class="nav-link" href="attributeindex.php">- Attribute List</a>
                             </li>
 
                         </ul>
